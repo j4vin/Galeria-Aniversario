@@ -12,13 +12,8 @@
     let selectedIndex: number | null = null;
     let hasLightboxBeenOpened = false;
     let isInfoBoxExpanded = true;
-    
-    // ---- INICIO DE LA SOLUCIÓN ----
-    // Estas variables ahora se inicializan sin un valor directo de `window`
     let windowWidth = 0;
-    let isMobile = false; 
-    // ---- FIN DE LA SOLUCIÓN ----
-
+    $: isMobile = windowWidth < 768;
     let arrowsVisible = true;
     let inactivityTimer: ReturnType<typeof setTimeout>;
     let touchStartX = 0;
@@ -87,19 +82,7 @@
     
     // --- onMount: Configuración inicial de la página ---
     onMount(() => {
-        // ---- INICIO DE LA SOLUCIÓN ----
-        // Asignamos el valor de windowWidth y calculamos isMobile AQUÍ,
-        // dentro de onMount, para asegurar que se ejecuta solo en el navegador.
         windowWidth = window.innerWidth;
-        isMobile = windowWidth < 768;
-
-        // Se añade un listener para actualizar los valores si la ventana cambia de tamaño
-        window.addEventListener('resize', () => {
-            windowWidth = window.innerWidth;
-            isMobile = windowWidth < 768;
-        });
-        // ---- FIN DE LA SOLUCIÓN ----
-
         window.scrollTo(0, 0);
 
         let ctx = gsap.context(() => {
@@ -182,8 +165,7 @@
     }
 </script>
 
-<!-- (El HTML no cambia, he eliminado bind:innerWidth del svelte:window porque ahora se maneja en onMount) -->
-<svelte:window on:keydown={handleGlobalKeydown} />
+<svelte:window bind:innerWidth={windowWidth} on:keydown={handleGlobalKeydown} />
 
 <div class="scroll-wrapper" bind:this={scrollWrapper} class:simplified={isSimplified}>
     <div class="hero-container" bind:this={heroContainer}>
