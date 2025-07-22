@@ -22,7 +22,7 @@ export const images: Image[] = [
 		alt: 'Descripción alternativa para la imagen 1.',
 		title: 'Encuentro Misiones 2017',
 		description: 'Jóvenes de la comunidad en el Encuentro previo a las Misiones 2017.',
-        date: '2017-01-01'
+        date: '2017-01-02'
 	},
     {
 		id: 2,
