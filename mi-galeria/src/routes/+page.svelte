@@ -1,6 +1,4 @@
 <script lang="ts">
-	// NINGÚN CAMBIO EN EL SCRIPT.
-	// El código de esta sección es idéntico al anterior.
 	import { onMount, tick } from 'svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js';
@@ -9,6 +7,7 @@
 
 	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+	// --- Variables de Estado ---
 	let selectedImage: Image | null = null;
 	let selectedIndex: number | null = null;
 	let hasLightboxBeenOpened = false;
@@ -20,7 +19,12 @@
 	let touchStartX = 0;
 	const SWIPE_THRESHOLD = 50;
 	let isSimplified = false;
+	
+    // --- Variables para el botón "Volver al Inicio" ---
+    let showBackToTop = false;
+    const SCROLL_THRESHOLD = 400; // Píxeles a scrollear antes de que aparezca el botón
 
+	// --- Referencias a Elementos del DOM ---
 	let prevBtn: HTMLButtonElement;
 	let nextBtn: HTMLButtonElement;
 	let heroContainer: HTMLElement;
@@ -30,6 +34,7 @@
 	let mainContent: HTMLElement;
 	let bgImageWrappers: HTMLElement[] = [];
 
+	// --- Lógica para agrupar imágenes por año ---
 	type YearGroup = {
 		year: number;
 		images: Image[];
@@ -49,6 +54,7 @@
 		galleryByYear = Array.from(yearMap.entries()).map(([year, images]) => ({ year, images }));
 	}
 
+	// --- Funciones de Navegación ---
 	function scrollToYear(year: number) {
 		gsap.to(window, {
 			duration: 1.5,
@@ -60,6 +66,15 @@
 		});
 	}
 
+    function scrollToTop() {
+        gsap.to(window, {
+            duration: 1.5,
+            scrollTo: 0,
+            ease: 'power3.inOut'
+        });
+    }
+
+	// --- Lógica del Modal ---
 	async function openModal(image: Image, index: number) {
 		if (!isSimplified) {
 			const currentScrollY = window.scrollY;
@@ -118,14 +133,18 @@
 		selectedIndex = null;
 		clearTimeout(inactivityTimer);
 	}
-
+	
+	// --- onMount: Configuración inicial ---
 	onMount(() => {
 		windowWidth = window.innerWidth;
 		window.scrollTo(0, 0);
+        window.addEventListener('scroll', handleScroll);
+
 		let ctx = gsap.context(() => {
 			const entryTl = gsap.timeline();
 			entryTl.from(heroContent, { yPercent: -50, autoAlpha: 0, duration: 1.5, ease: 'power3.out' });
-			let currentBgIndex = 0;
+			
+            let currentBgIndex = 0;
 			const bgInterval = setInterval(() => {
 				if (isSimplified) {
 					clearInterval(bgInterval);
@@ -136,6 +155,7 @@
 				gsap.to(bgImageWrappers[currentBgIndex], { autoAlpha: 1, duration: 1.5, ease: 'power2.inOut' });
 			}, 3000);
 			gsap.to(bgImageWrappers[0], { autoAlpha: 1, duration: 1.5 });
+
 			gsap.timeline({
 				scrollTrigger: {
 					trigger: scrollWrapper,
@@ -144,25 +164,24 @@
 					scrub: 1
 				}
 			})
-				.to(heroContent, {
-					autoAlpha: 0,
-					yPercent: -150,
-					duration: 0.3
-				})
-				.to(
-					heroBackground,
-					{
-						autoAlpha: 0,
-						duration: 0.3
-					},
-					'<'
-				);
+				.to(heroContent, { autoAlpha: 0, yPercent: -150, duration: 0.3 })
+				.to(heroBackground, { autoAlpha: 0, duration: 0.3 }, '<');
 		});
+		
 		return () => {
 			ctx.revert();
+            window.removeEventListener('scroll', handleScroll);
 		};
 	});
 
+	// --- Funciones Auxiliares ---
+    function handleScroll() {
+        if (window.scrollY > SCROLL_THRESHOLD) {
+            showBackToTop = true;
+        } else {
+            showBackToTop = false;
+        }
+    }
 	function toggleInfoBox() { isInfoBoxExpanded = !isInfoBoxExpanded; }
 	function resetInactivityTimer() {
 		if (!isMobile) return;
@@ -208,7 +227,6 @@
 	}
 </script>
 
-<!-- NINGÚN CAMBIO EN EL HTML -->
 <svelte:head>
 	<title>20 Aniversario - Galería de Recuerdos</title>
 	<meta name="description" content="Una galería de fotos celebrando nuestros 20 años de historia." />
@@ -295,9 +313,19 @@
     </div>
 {/if}
 
+<button 
+    class="back-to-top-btn" 
+    class:visible={showBackToTop}
+    on:click={scrollToTop}
+    aria-label="Volver al inicio de la página"
+>
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <span class="text">Volver al inicio</span>
+</button>
+
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
-	/* Estilos globales y del hero (sin cambios hasta la sección de la flecha) */
+	
 	:global(body) { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; background-color: #fdfcf9; color: #333; }
 	.scroll-wrapper { position: relative; height: 200vh; }
 	.scroll-wrapper.simplified { height: auto; }
@@ -311,58 +339,33 @@
 	.hero-title { width: clamp(500px, 80vw, 800px); }
 	.hero-title img { width: 100%; height: auto; display: block; }
 	
-    /* --- CAMBIO INICIA: Estilos de la flecha responsiva --- */
-
-	/* Estilos por defecto (Escritorio) */
+	/* Estilos por defecto para la flecha de scroll (Escritorio) */
 	.arrow-container {
 		margin-top: 2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
-
 	.scroll-arrow {
 		width: 20px;
 		height: 20px;
 		border: solid #333;
 		border-width: 0 3px 3px 0;
 		transform: rotate(45deg); /* Apunta hacia ABAJO */
-		animation: bounce 2s infinite; /* Animación de REBOTE */
+		animation: bounce 2s infinite;
 	}
+	.scroll-arrow:last-child { display: none; }
 
-	/* Ocultamos la segunda flecha en escritorio */
-	.scroll-arrow:last-child {
-		display: none;
-	}
-
-	/* Animación de rebote (para escritorio) */
 	@keyframes bounce {
-		0%, 20%, 50%, 80%, 100% {
-			transform: translateY(0) rotate(45deg);
-		}
-		40% {
-			transform: translateY(15px) rotate(45deg);
-		}
-		60% {
-			transform: translateY(8px) rotate(45deg);
-		}
+		0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+		40% { transform: translateY(15px) rotate(45deg); }
+		60% { transform: translateY(8px) rotate(45deg); }
 	}
-
-	/* Animación de deslizamiento hacia arriba (para móvil) */
 	@keyframes move-up {
-		0% {
-			opacity: 0;
-			transform: translateY(15px) rotate(-135deg);
-		}
-		50% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-			transform: translateY(-15px) rotate(-135deg);
-		}
+		0% { opacity: 0; transform: translateY(15px) rotate(-135deg); }
+		50% { opacity: 1; }
+		100% { opacity: 0; transform: translateY(-15px) rotate(-135deg); }
 	}
-    /* --- CAMBIO TERMINA --- */
 
 	.scroll-prompt { margin: 0.75rem 0 0 0; font-size: 0.875rem; color: #666; letter-spacing: 0.5px; font-weight: 300; }
 	.gallery-title { text-align: center; font-size: 3rem; font-weight: 400; letter-spacing: 1px; margin: 4rem 1rem 0; font-family: 'Dancing Script', cursive; }
@@ -370,7 +373,8 @@
 	.year-nav { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 4rem; padding: 0 1rem; }
 	.year-nav button { background: none; border: none; font-size: 1.6rem; font-weight: 700; color: #555; cursor: pointer; transition: color 0.3s ease, transform 0.2s ease; padding: 0.5rem 1rem; }
 	.year-nav button:hover, .year-nav button:focus { color: #000; transform: scale(1.1); }
-	.timeline-gallery { max-width: 900px; margin: 0 auto; padding: 1rem 2rem; }
+	
+    .timeline-gallery { max-width: 900px; margin: 0 auto; padding: 1rem 2rem; }
 	.year-section { display: flex; gap: 2rem; margin-bottom: 4rem; }
 	.year-marker { flex: 0 0 80px; position: relative; text-align: center; }
 	.year-label { font-size: 2.5rem; font-weight: 700; color: #bbb; position: sticky; top: 4rem; margin: 0; }
@@ -379,7 +383,8 @@
 	.gallery-item { border: none; padding: 0; overflow: hidden; cursor: pointer; position: relative; visibility: visible; border-radius: 12px; width: 100%; }
 	.gallery-item img { width: 100%; height: auto; object-fit: cover; transition: transform 0.3s ease; display: block; }
 	.gallery-item:hover img { transform: scale(1.02); }
-	.modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background-color: rgba(0, 0, 0, 0.9); display: flex; justify-content: center; align-items: center; }
+	
+    .modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background-color: rgba(0, 0, 0, 0.9); display: flex; justify-content: center; align-items: center; }
 	.modal-content { position: relative; max-width: 90vw; max-height: 90vh; }
 	.modal-content img { display: block; width: auto; height: auto; max-width: 100%; max-height: 90vh; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); -webkit-user-select: none; user-select: none; }
 	.close-btn { position: absolute; top: -40px; right: 0px; background: none; border: none; font-size: 2.5rem; color: white; cursor: pointer; line-height: 1; }
@@ -398,32 +403,58 @@
 	.info-title { font-size: 1.25rem; font-weight: 600; margin: 0; }
 	.info-description { font-size: 1rem; font-weight: 300; margin: 0.5rem 0 0; max-width: 800px; margin-left: auto; margin-right: auto; }
 	
-	/* --- CAMBIO INICIA: Media Query para sobrescribir estilos en móvil --- */
+    .back-to-top-btn {
+        position: fixed;
+        bottom: 25px;
+        left: 25px;
+        z-index: 999;
+        background-color: rgba(51, 51, 51, 0.85);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        transition: opacity 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .back-to-top-btn.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        animation: pulse-glow 2.5s infinite;
+    }
+    .back-to-top-btn:hover {
+        background-color: rgba(0, 0, 0, 1);
+        transform: scale(1.05);
+        animation-play-state: paused;
+    }
+    .back-to-top-btn .icon { width: 22px; height: 22px; }
+    .back-to-top-btn .text { font-size: 1rem; font-weight: 500; line-height: 1; }
+
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        50% { box-shadow: 0 4px 25px 5px rgba(0,0,0,0.3); }
+    }
+
 	@media (max-width: 768px) {
 		.gallery-title { font-size: 2.2rem; }
 		.gallery-subtitle { font-size: 0.9rem; margin-top: 0.1rem; margin-bottom: 1.5rem; }
 		.year-nav { gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
 		.year-nav button { font-size: 1.2rem; }
 
-		/* Estilos para el contenedor de la flecha en móvil */
-		.arrow-container {
-			margin-top: 1.5rem;
-			gap: 8px; /* Añadimos espacio entre las dos flechas */
-		}
-
-		/* Sobrescribimos los estilos de la flecha para móvil */
+		.arrow-container { margin-top: 1.5rem; gap: 8px; }
 		.scroll-arrow {
 			transform: rotate(-135deg); /* Apunta hacia ARRIBA */
-			animation: move-up 2s ease-out infinite; /* Animación de DESLIZAMIENTO */
+			animation: move-up 2s ease-out infinite;
 		}
-
-		/* Mostramos la segunda flecha */
-		.scroll-arrow:last-child {
-			display: block;
-			animation-delay: -0.5s; /* Efecto cascada */
-		}
+		.scroll-arrow:last-child { display: block; animation-delay: -0.5s; }
 		
-		/* El resto de los estilos responsivos permanecen igual */
 		.timeline-gallery { padding: 0.5rem; }
 		.year-section { gap: 1rem; margin-bottom: 3rem; }
 		.year-marker { flex-basis: 50px; }
@@ -441,6 +472,13 @@
 		.info-description { font-size: 0.875rem; }
 		.hero-title { width: 90vw; }
 		.scroll-prompt { font-size: 0.8rem; }
+        
+        .back-to-top-btn {
+            bottom: 20px;
+            left: 20px;
+            padding: 12px;
+        }
+        .back-to-top-btn .text { display: none; }
+        .back-to-top-btn .icon { width: 24px; height: 24px; }
 	}
-	/* --- CAMBIO TERMINA --- */
 </style>
