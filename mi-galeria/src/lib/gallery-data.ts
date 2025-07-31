@@ -541,6 +541,141 @@ export const images: Image[] = [
         title: 'Rosario Mes de María 2021',
         description: 'Rosario en el mes de María 2021.',
         date: '2021-11-24'
+    },
+
+    {
+        id: 60,
+        src: '/images/img_2010-24sep(2).jpeg',
+        alt: 'Descripción alternativa para la imagen 60.',
+        title: 'Bicentenario Chile 2010',
+        description: 'Decoración de Bicentenario de nuestra Patria Chile en 2010.',
+        date: '2010-09-24'
+    },
+
+    {
+        id: 61,
+        src: '/images/img_2010-24sep.jpeg',
+        alt: 'Descripción alternativa para la imagen 61.',
+        title: '"Feliz el pueblo que sabe alabarte con alegría y camina alumbrado por tu luz"',
+        description: ' ',
+        date: '2010-09-24'
+    },
+
+    {
+        id: 62,
+        src: '/images/img_2010-sep.jpeg',
+        alt: 'Descripción alternativa para la imagen 62.',
+        title: 'Bicentenario de nuestra hermosa Patria',
+        description: ' ',
+        date: '2010-09-24'
+    },
+
+    {
+        id: 63,
+        src: '/images/img_img_2011-12jun(2).jpeg',
+        alt: 'Descripción alternativa para la imagen 63.',
+        title: 'Pentecostés 2011',
+        description: 'Misa de Pentecostés en 2011.',
+        date: '2011-06-12'
+    },
+
+    {
+        id: 64,
+        src: '/images/img_2011-12jun.jpeg',
+        alt: 'Descripción alternativa para la imagen 64.',
+        title: 'Pentecostés 2011',
+        description: 'Decoración de Pentecostés en 2011.',
+        date: '2011-06-12'
+    },
+
+    {
+        id: 65,
+        src: '/images/img_2012-10jun(2).jpeg',
+        alt: 'Descripción alternativa para la imagen 65.',
+        title: 'Corpus Christi 2012',
+        description: 'Misa de Corpus Christi en 2012.',
+        date: '2012-06-10'
+    },
+
+    {
+        id: 66,
+        src: '/images/img_2010-03dic.jpeg',
+        alt: 'Descripción alternativa para la imagen 66.',
+        title: 'Primeras Comuniones 2010',
+        description: 'Decoración del Altar para las Primeras Comuniones en 2010.',
+        date: '2010-12-03'
+    },
+
+    {
+        id: 67,
+        src: '/images/img_2012-10jun.jpeg',
+        alt: 'Descripción alternativa para la imagen 67.',
+        title: 'Corpus Christi 2012',
+        description: 'Celebración de Corpus Christi en 2012.',
+        date: '2012-06-10'
+    },
+
+    {
+        id: 68,
+        src: '/images/img_2005-11sep.jpeg',
+        alt: 'Descripción alternativa para la imagen 68.',
+        title: '"Aquí se construye nuestra futura Parroquia Jesús Maestro"',
+        description: 'Cartel de la construcción de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-09-11'
+    },
+
+    {
+        id: 69,
+        src: '/images/img_2005-30sep(2).jpeg',
+        alt: 'Descripción alternativa para la imagen 69.',
+        title: 'Entrada Principal',
+        description: 'Entrada principal de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-09-30'
+    },
+
+    {
+        id: 70,
+        src: '/images/img_2005-30sep(3).jpeg',
+        alt: 'Descripción alternativa para la imagen 70.',
+        title: 'Interior de la Parroquia 2005',
+        description: 'Como lucia el interior de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-09-30'
+    },
+
+    {
+        id: 71,
+        src: '/images/img_2005-30sep(4).jpeg',
+        alt: 'Descripción alternativa para la imagen 71.',
+        title: 'Interior de la Parroquia 2005',
+        description: 'Como lucia el interior de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-09-30'
+    },
+
+    {
+        id: 72,
+        src: '/images/img_2005-30sep.jpeg',
+        alt: 'Descripción alternativa para la imagen 72.',
+        title: 'Donde iría el Sagrario',
+        description: 'Zona antes del Sagrario en 2005.',
+        date: '2005-09-30'
+    },
+
+    {
+        id: 73,
+        src: '/images/img_2005-31jul.jpeg',
+        alt: 'Descripción alternativa para la imagen 73.',
+        title: 'Entrada Principal en Construcción',
+        description: 'Desde el interior, como lucía la entrada principal de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-07-31'
+    },
+
+    {
+        id: 74,
+        src: '/images/img_2005-11sep(2).jpeg',
+        alt: 'Descripción alternativa para la imagen 74.',
+        title: 'El Altar',
+        description: 'Construcción del primer Altar.',
+        date: '2005-09-11'
     }
 
 ];
