@@ -572,7 +572,7 @@ export const images: Image[] = [
 
     {
         id: 63,
-        src: '/images/img_img_2011-12jun(2).jpeg',
+        src: '/images/img_2011-12jun(2).jpeg',
         alt: 'Descripción alternativa para la imagen 63.',
         title: 'Pentecostés 2011',
         description: 'Misa de Pentecostés en 2011.',
@@ -676,8 +676,106 @@ export const images: Image[] = [
         title: 'El Altar',
         description: 'Construcción del primer Altar.',
         date: '2005-09-11'
-    }
+    },
 
+    {
+        id: 75,
+        src: '/images/img_2010.jpg',
+        alt: 'Descripción alternativa para la imagen 75.',
+        title: 'Equipo Liturgia 2010',
+        description: 'El equipo de Liturgia de la Parroquia Jesús Maestro en 2010.',
+        date: '2010-09-11'
+    },
+
+    {
+        id: 76,
+        src: '/images/img_2005-oct.jpg',
+        alt: 'Descripción alternativa para la imagen 76.',
+        title: 'Consagración de la Parroquia Jesús Maestro',
+        description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-11'
+    },
+
+    {
+        id: 77,
+        src: '/images/img_2005-oct(2).jpg',
+        alt: 'Descripción alternativa para la imagen 77.',
+        title: 'Consagración de la Parroquia Jesús Maestro',
+        description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-11'
+    },
+
+    {
+        id: 78,
+        src: '/images/img_2005-oct(3).jpg',
+        alt: 'Descripción alternativa para la imagen 78.',
+        title: 'Consagración de la Parroquia Jesús Maestro',
+        description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-11'
+    },
+
+    {
+        id: 79,
+        src: '/images/img_2005-oct(3).jpg',
+        alt: 'Descripción alternativa para la imagen 79.',
+        title: 'Consagración de la Parroquia Jesús Maestro',
+        description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-11'
+    },
+
+    {
+        id: 80,
+        src: '/images/img_2005-oct(4).jpg',
+        alt: 'Descripción alternativa para la imagen 80.',
+        title: 'Consagración de la Parroquia Jesús Maestro',
+        description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-11'
+    },
+
+    {
+        id: 81,
+        src: '/images/img_2005-oct(5).jpg',
+        alt: 'Descripción alternativa para la imagen 81.',
+        title: 'Consagración de la Parroquia Jesús Maestro',
+        description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-11'
+    },
+
+    {
+        id: 82,
+        src: '/images/img_2017.jpg',
+        alt: 'Descripción alternativa para la imagen 82.',
+        title: 'Consejo Parroquial 2017',
+        description: 'El Consejo Parroquial de la Parroquia Jesús Maestro en 2017.',
+        date: '2017-10-11'
+    },
+
+    {
+        id: 83,
+        src: '/images/img_2005-02oct.png',
+        alt: 'Descripción alternativa para la imagen 83.',
+        title: 'Adiós a la plaza',
+        description: 'En procesión desde la plaza hasta nuestra Parroquia Jesús Maestro.',
+        date: '2005-10-02'
+    },
+
+    {
+        id: 84,
+        src: '/images/img_2005-02oct.jpg',
+        alt: 'Descripción alternativa para la imagen 84.',
+        title: 'Adiós a la plaza',
+        description: 'Despediendo a la plaza de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-02'
+    },
+
+    {
+        id: 85,
+        src: '/images/img_2005-02oct(2).jpg',
+        alt: 'Descripción alternativa para la imagen 85.',
+        title: 'Adiós a la plaza',
+        description: 'Despediendo a la plaza de la Parroquia Jesús Maestro en 2005.',
+        date: '2005-10-02'
+    }
 ];
 
 // 3. LÓGICA DE ORDENAMIENTO AUTOMÁTICO
