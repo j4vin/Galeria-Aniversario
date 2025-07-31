@@ -698,7 +698,7 @@ export const images: Image[] = [
 
     {
         id: 77,
-        src: '/images/img_2005-oct(2).jpg',
+        src: '/images/img_2005-oct (2).jpg',
         alt: 'Descripción alternativa para la imagen 77.',
         title: 'Consagración de la Parroquia Jesús Maestro',
         description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
@@ -706,17 +706,8 @@ export const images: Image[] = [
     },
 
     {
-        id: 78,
-        src: '/images/img_2005-oct(3).jpg',
-        alt: 'Descripción alternativa para la imagen 78.',
-        title: 'Consagración de la Parroquia Jesús Maestro',
-        description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
-        date: '2005-10-11'
-    },
-
-    {
         id: 79,
-        src: '/images/img_2005-oct(3).jpg',
+        src: '/images/img_2005-oct (3).jpg',
         alt: 'Descripción alternativa para la imagen 79.',
         title: 'Consagración de la Parroquia Jesús Maestro',
         description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
@@ -725,7 +716,7 @@ export const images: Image[] = [
 
     {
         id: 80,
-        src: '/images/img_2005-oct(4).jpg',
+        src: '/images/img_2005-oct (4).jpg',
         alt: 'Descripción alternativa para la imagen 80.',
         title: 'Consagración de la Parroquia Jesús Maestro',
         description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
@@ -734,7 +725,7 @@ export const images: Image[] = [
 
     {
         id: 81,
-        src: '/images/img_2005-oct(5).jpg',
+        src: '/images/img_2005-oct (5).jpg',
         alt: 'Descripción alternativa para la imagen 81.',
         title: 'Consagración de la Parroquia Jesús Maestro',
         description: 'La consagración de la Parroquia Jesús Maestro en 2005.',
@@ -761,7 +752,7 @@ export const images: Image[] = [
 
     {
         id: 84,
-        src: '/images/img_2005-02oct.jpg',
+        src: '/images/img_2005-02oct.JPG',
         alt: 'Descripción alternativa para la imagen 84.',
         title: 'Adiós a la plaza',
         description: 'Despediendo a la plaza de la Parroquia Jesús Maestro en 2005.',
@@ -770,7 +761,7 @@ export const images: Image[] = [
 
     {
         id: 85,
-        src: '/images/img_2005-02oct(2).jpg',
+        src: '/images/img_2005-02oct(2).JPG',
         alt: 'Descripción alternativa para la imagen 85.',
         title: 'Adiós a la plaza',
         description: 'Despediendo a la plaza de la Parroquia Jesús Maestro en 2005.',
